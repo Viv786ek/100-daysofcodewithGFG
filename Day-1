@@ -1,9 +1,7 @@
 Sort an array of 0s, 1s and 2s
 
 <***** SOLUTIONS *****>
-class Solution
-{
-    public:
+
     void sort012(int arr[], int n)
     {
         // coode here 
@@ -26,6 +24,5 @@ class Solution
             }
         }
     }
-    
-};
+ 
 
