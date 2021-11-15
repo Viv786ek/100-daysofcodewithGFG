@@ -1,0 +1,13 @@
+void check(Node* root){
+   if(!root) return;
+   
+   check(root->left);
+   check(root->right);
+   swap(root->left,root->right);
+   
+   return;
+ }
+   void mirror(Node* node) {
+       if(!node) return;
+       check(node);
+   }
