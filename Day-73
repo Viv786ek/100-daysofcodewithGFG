@@ -1,0 +1,33 @@
+int64_t power(int64_t a, int64_t b,int mod){
+	    int64_t res = 1;
+	    while(b>0){
+	        if(b%2 != 0){
+	            res = (res*a)%mod;
+	        }
+	        b /= 2;
+	        a = (a*a)%mod;
+	    }
+	    return res;
+	}
+    int totalWays(int N, int K) {
+        // Code here.
+        if(K>N){
+            return 0;//no possible ways
+        }
+        // C(N+K-1,K-1);// if atleast 0 is can be given
+        // C(N+K-1-K,K-1); // if atleast 1 to be given
+        //i.e C(N-1,K-1)
+        int n = N-1;
+        int r = K-1;
+        r = min(r,n-r);
+        int mod = 1e9+7;
+        int64_t ans = 1;
+        for(int i=0,j=n; i<r; i++,j--){
+            ans = (ans*j)%mod;
+            // ans = (ans/(i+1));
+            ans = ans*power(i+1,mod-2,mod)%mod;
+            //completey perform modular division and multiplication
+            //don't do partially
+        }
+        return ans;
+    }
