@@ -1,0 +1,21 @@
+
+
+int NthRoot(int n, int m)
+{
+    long long int s = 1, e = m;
+    while(s <= e){
+        long long int mid = (s+e)/2, temp = 1;
+        int i = 1;
+        bool flag = false;
+        while(i++ <= n){
+            temp *= mid;
+            if(temp > m){ flag = true; break; }
+        }
+        
+        if(flag){ e = mid - 1; continue; }
+        if(temp == m) return (mid);
+        else if(temp < m) s = mid + 1;
+        else e = mid - 1;
+    }
+    return (-1);
+}
