@@ -1,0 +1,51 @@
+int isSafe(int i,int j,int n,int m){
+        if(i>=0 && i<n && j>=0 && j<m){
+            return 1;
+        }
+        return 0;
+    }
+    int orangesRotting(vector<vector<int>>& grid) {
+        // Code here
+        // bfs
+        // instead of vis, use grid property of 2 as visited for fresh oranges
+        queue<pair<int,int>> q;
+        vector<int> dx = {-1,0,0,1};
+        vector<int> dy = {0,-1,1,0};
+        
+        int n = grid.size();
+        if(n == 0){
+            return -1;
+        }
+        int m = grid[0].size();
+        int fresh = 0;
+        
+        for(int i=0; i<n; i++){
+            for(int j=0; j<m; j++){
+                if(grid[i][j] == 2){
+                    q.push({i,j});
+                }
+                if(grid[i][j] == 1){
+                    fresh += 1;
+                }
+            }
+        }
+        int timeTaken = 0;
+        while(!q.empty()){
+            int q_size = q.size();
+            while(q_size > 0){
+                int x = q.front().first, y = q.front().second;
+                q.pop();
+                for(int k=0; k<4; k++){
+                    if(isSafe(x+dx[k],y+dy[k],n,m) && grid[x+dx[k]][y+dy[k]] == 1){
+                        grid[x+dx[k]][y+dy[k]] = 2;//mark as visited
+                        fresh -= 1;
+                        q.push({x+dx[k],y+dy[k]});//push into queue
+                    }
+                }
+                q_size -= 1;
+            }
+            timeTaken += 1;
+        }
+        // no of steps are no of levels-1
+        return (fresh>0?-1:timeTaken-1);
+    }
