@@ -1,0 +1,18 @@
+ int closestToZero(int arr[], int n)
+       {
+           if(n==1) return arr[n];
+           sort(arr, arr + n);
+           int res = arr[0] + arr[n-1];
+           int sum = 0;
+           for(int i=0;i<n;i++){
+               for(int j=0; j<n; j++){
+                   if(i==j) break;
+                   sum = arr[i]+arr[j];
+                   if(abs(sum) < abs(res)){
+                       res = sum;
+                   }
+               }
+           }
+               
+       return res;
+       }
