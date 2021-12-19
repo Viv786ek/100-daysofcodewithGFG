@@ -1,0 +1,23 @@
+vector<long long> printFirstNegativeInteger(long long int A[],
+                                             long long int n, long long int k) {
+                                                 vector<long long> ans;
+    int j = n-k;
+    long long pos=-1;
+    for(int i=n-1;i>j;i--){
+        if(A[i]<0) pos=i;
+    }
+    
+    
+    for(int i=j;i>-1;i--){
+        if(A[i]<0) pos=i;
+        if(pos-i>=k) pos=-1;
+        else ;
+        
+        if(pos==-1) ans.push_back(0);
+        else ans.push_back(A[pos]);
+    }
+    reverse(ans.begin(),ans.end());
+    
+    return ans;
+                                                 
+ }
