@@ -1,0 +1,41 @@
+vector<int> leftView(Node *root)
+{
+   // Your code here
+   
+   if(!root)
+    return {};
+   
+   typedef pair<Node *, int> pi;
+   queue<pi> qu;
+   vector<int> ans;
+   int currLevel = 0, prevLevel = -1;
+   
+   qu.push({root, 0});   // root is at 0 level
+   
+   while(!qu.empty()){
+        pi temp = qu.front();  
+        qu.pop();
+        
+        currLevel = temp.second;
+        
+        // if level of two consecutive nodes are different
+        // it means the node having higher level is the
+        // first in its level and should be inserted in ans.
+        
+        if(currLevel != prevLevel){
+            ans.push_back(temp.first->data);
+            prevLevel = currLevel;
+        }
+        
+        // level of children is parent+1
+        
+        if(temp.first->left)
+           qu.push({temp.first->left, temp.second + 1});
+        
+        if(temp.first->right)
+           qu.push({temp.first->right, temp.second + 1});
+        
+   }
+   return ans;
+   
+}
