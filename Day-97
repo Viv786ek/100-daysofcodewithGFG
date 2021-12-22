@@ -1,0 +1,20 @@
+int countPaths(int V, vector<int> adj[], int source, int destination) {
+        // Code here
+        
+        
+        if(source == destination)
+        {
+            return 1;
+        }
+        
+        int count = 0;
+        
+        for(int i=0;i<adj[source].size();i++)
+        {
+            count += countPaths(V,adj,adj[source][i],destination);
+        }
+        
+        return count;
+            
+        
+    }
