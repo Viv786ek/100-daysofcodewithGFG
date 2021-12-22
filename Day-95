@@ -1,0 +1,38 @@
+pair<int,int> calc_diff(Node *root)
+{
+   if(root->left==NULL and root->right==NULL)
+   {
+       pair<int,int>p;
+       p.first=root->data;//return min val
+       p.second=INT_MIN;//return ans
+       return p;
+   }
+   pair<int,int>p;
+   pair<int,int>lp;
+   pair<int,int>rp;
+   if(root->left)
+   lp=calc_diff(root->left);
+   else
+   {
+    lp.first=INT_MAX;
+    lp.second=INT_MIN;
+   }
+   if(root->right)
+   rp=calc_diff(root->right);
+   else
+   {
+    rp.first=INT_MAX;
+    rp.second=INT_MIN;
+   }
+   int mini=min(lp.first,rp.first);
+   p.first=min(mini,root->data);
+   p.second=max(root->data-mini,max(lp.second,rp.second));
+   return p;
+   
+}
+int maxDiff(Node* root)
+{
+   // Your code here 
+   pair<int,int>p=calc_diff(root);
+   return p.second;
+}
