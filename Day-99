@@ -1,0 +1,27 @@
+  long long int maximizeSum(long long int a[], int n, int k)
+{
+ sort(a,a+n);
+        int i=0;
+        while(i<n){
+            if(k>0){
+                if(a[i]<0){
+                    a[i]=-a[i];
+                    k--;
+                }
+            }
+            i++;
+            
+        }
+        
+        sort(a,a+n);
+    
+        while(k>0){
+            a[0]=-a[0];
+            k--;
+        }
+        long long int sum=0;
+        for(int x=0;x<n;x++){
+            sum+=a[x];
+        }
+        return sum;
+      ]  
